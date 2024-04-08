@@ -69,7 +69,8 @@
       <div v-if="error" class="mt-4 text-red-500">{{ error }}</div>
     </div>
     <div class="mt-4 text-center text-sm text-gray-600">
-      Already have an account? <a href="/login" class="text-indigo-600 hover:text-indigo-500">Log in</a>
+      Already have an account?
+      <a href="/login" class="text-indigo-600 hover:text-indigo-500">Log in</a>
     </div>
   </div>
 </template>

@@ -72,18 +72,37 @@
       Already have an account?
       <button @click="navigateToLogin" class="text-indigo-600 hover:text-indigo-500">Log in</button>
     </div>
+
+    <GenericPopup
+      v-if="showPopup"
+      :popupTitle="popupTitle"
+      :popupDescription="popupDescription"
+      :buttonText="buttonText"
+      :iconType="iconType"
+      @close-popup="closePopup"
+      @button-click="buttonClick"
+    />
   </div>
 </template>
 
 <script>
 import axios from 'axios'
+import GenericPopup from './GenericPopup.vue'
 export default {
+  components: {
+    GenericPopup
+  },
   data() {
     return {
       name: '',
       email: '',
       password: '',
-      error: ''
+      error: '',
+      popupTitle: 'Success',
+      popupDescription: 'Successfully created an account. Log in to continue.',
+      buttonText: 'Log in',
+      iconType: 'success',
+      showPopup: false
     }
   },
   methods: {
@@ -95,17 +114,32 @@ export default {
           email: this.email,
           password: this.password
         })
-
-        // Handle successful login
-        console.log(response.data)
+        // Handle succesful login.
+        // Show success popup and update iconType to success.
+        this.showPopup = true
+        this.iconType = 'success'
       } catch (error) {
-        // Handle authentication error
-        console.error('Login failed:', error.response.data)
-        this.error = error.response.data.detail // Display error message to the user
+        // Handle unsuccessful login.
+        // Show popup and update iconType to failure.
+        // Also update title, description, and buttonText.
+        this.showPopup = true
+        this.iconType = 'failure'
+        this.popupTitle = 'Unsuccesful'
+        this.popupDescription = error.response.data.error
+        this.buttonText = 'Continue'
       }
     },
     navigateToLogin() {
       this.$router.push('/login')
+    },
+    closePopup() {
+      this.showPopup = false
+    },
+    buttonClick() {
+      // Check if registration was a success then make the button in the pop redirect to /login page
+      if (this.iconType == 'sucess') this.$router.push('/login')
+      // Else just close the popup.
+      else this.showPopup = false
     }
   }
 }

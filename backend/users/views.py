@@ -47,7 +47,7 @@ def addUser(request):
             if name and email and password:
                 # Check if a user with the same email exists
                 if profile.objects.filter(email=email).exists():
-                    return JsonResponse({'error':'User with the same email already exists.'}, status=400)
+                    return JsonResponse({'error':'User with the same email already exists. Please try again.'}, status=400)
                 else:
                     # Create a new user object
                     new_user = profile(

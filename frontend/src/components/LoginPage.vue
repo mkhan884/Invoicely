@@ -72,11 +72,7 @@
 
 <script>
 import axios from 'axios'
-import GenericPopup from './GenericPopup.vue'
 export default {
-  components: {
-    GenericPopup
-  },
 
   data() {
     return {

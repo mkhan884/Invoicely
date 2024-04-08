@@ -98,10 +98,10 @@ export default {
       email: '',
       password: '',
       error: '',
-      popupTitle: 'Success',
-      popupDescription: 'Successfully created an account. Log in to continue.',
-      buttonText: 'Log in',
-      iconType: 'success',
+      popupTitle: '',
+      popupDescription: '',
+      buttonText: '',
+      iconType: '',
       showPopup: false
     }
   },
@@ -118,6 +118,9 @@ export default {
         // Show success popup and update iconType to success.
         this.showPopup = true
         this.iconType = 'success'
+        this.popupTitle = 'Success'
+        this.popupDescription = 'Successfully created an account. Log in to continue.',
+        this.buttonText = 'Log in'
       } catch (error) {
         // Handle unsuccessful login.
         // Show popup and update iconType to failure.
@@ -137,7 +140,7 @@ export default {
     },
     buttonClick() {
       // Check if registration was a success then make the button in the pop redirect to /login page
-      if (this.iconType == 'sucess') this.$router.push('/login')
+      if (this.iconType == 'success') this.$router.push('/login')
       // Else just close the popup.
       else this.showPopup = false
     }

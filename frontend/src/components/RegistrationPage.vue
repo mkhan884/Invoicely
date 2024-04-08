@@ -105,7 +105,7 @@ export default {
       }
     },
     navigateToLogin() {
-      this.$router.push('/login');
+      this.$router.push('/login')
     }
   }
 }

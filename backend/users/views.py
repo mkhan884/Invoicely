@@ -19,11 +19,11 @@ def authenticate(request):
                 if user_object:
                     password_matches = test_password(password, user_object.password)
                     if (password_matches):
-                        return JsonResponse({'authenticated': True})
+                        return JsonResponse({'authenticated': True}, status=200)
                     else:
-                        return JsonResponse({'authenticated': False, 'status': 'Incorrect password entered.'}) 
+                        return JsonResponse({'authenticated': False, 'status': 'Incorrect password entered.'}, status=400) 
                 else:
-                    return JsonResponse ({'authenticated': False, 'status': 'Incorrect email or password'})
+                    return JsonResponse ({'authenticated': False, 'status': 'Incorrect email or password'}, status=400)
             else:
                 return JsonResponse({'error': 'Email and password are required fields'}, status=400)
         except Exception as e:

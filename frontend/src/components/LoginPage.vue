@@ -30,11 +30,11 @@
             <label for="password" class="block text-sm font-medium leading-6 text-gray-900"
               >Password</label
             >
-            <!-- <div class="text-sm">
+            <div class="text-sm">
               <a href="#" class="font-semibold text-indigo-600 hover:text-indigo-500"
                 >Forgot password?</a
               >
-            </div> -->
+            </div>
           </div>
           <div class="mt-2">
             <input
@@ -62,20 +62,38 @@
       <div v-if="error" class="mt-4 text-red-500">{{ error }}</div>
       <div class="mt-4 text-center text-sm text-gray-600">
         Don't have an account?
-        <button @click="navigateToRegistration" class="text-indigo-600 hover:text-indigo-500">Sign Up!</button>
+        <button @click="navigateToRegistration" class="text-indigo-600 hover:text-indigo-500">
+          Sign Up!
+        </button>
       </div>
     </div>
+    <GenericPopup
+      v-if="showPopup"
+      :popupTitle = 'popupTitle'
+      :popupDescription = 'popupDescription'
+      :buttonText = 'buttonText'
+      @close-popup = 'closePopup'
+    />
   </div>
 </template>
 
 <script>
 import axios from 'axios'
+import GenericPopup from './GenericPopup.vue'
 export default {
+  components:{
+    GenericPopup
+  },
+  
   data() {
     return {
       email: '',
       password: '',
-      error: ''
+      error: '',
+      popupTitle: 'Success',
+      popupDescription: 'Successfully created an account. Log in to continue.',
+      buttonText: 'Log in',
+      showPopup: true
     }
   },
   methods: {
@@ -96,7 +114,10 @@ export default {
       }
     },
     navigateToRegistration() {
-      this.$router.push('/signup');
+      this.$router.push('/signup')
+    },
+    closePopup(){
+      this.showPopup = false
     }
   }
 }

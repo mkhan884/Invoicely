@@ -30,11 +30,11 @@
             <label for="password" class="block text-sm font-medium leading-6 text-gray-900"
               >Password</label
             >
-            <div class="text-sm">
+            <!-- <div class="text-sm">
               <a href="#" class="font-semibold text-indigo-600 hover:text-indigo-500"
                 >Forgot password?</a
               >
-            </div>
+            </div> -->
           </div>
           <div class="mt-2">
             <input
@@ -62,7 +62,7 @@
       <div v-if="error" class="mt-4 text-red-500">{{ error }}</div>
       <div class="mt-4 text-center text-sm text-gray-600">
         Don't have an account?
-        <a href="/login" class="text-indigo-600 hover:text-indigo-500">Sign Up!</a>
+        <button @click="navigateToRegistration" class="text-indigo-600 hover:text-indigo-500">Sign Up!</button>
       </div>
     </div>
   </div>
@@ -94,6 +94,9 @@ export default {
         console.error('Login failed:', error.response.data)
         this.error = error.response.data.detail // Display error message to the user
       }
+    },
+    navigateToRegistration() {
+      this.$router.push('/signup');
     }
   }
 }

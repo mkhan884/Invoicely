@@ -70,7 +70,7 @@
     </div>
     <div class="mt-4 text-center text-sm text-gray-600">
       Already have an account?
-      <a href="/login" class="text-indigo-600 hover:text-indigo-500">Log in</a>
+      <button @click="navigateToLogin" class="text-indigo-600 hover:text-indigo-500">Log in</button>
     </div>
   </div>
 </template>
@@ -103,6 +103,9 @@ export default {
         console.error('Login failed:', error.response.data)
         this.error = error.response.data.detail // Display error message to the user
       }
+    },
+    navigateToLogin() {
+      this.$router.push('/login');
     }
   }
 }

@@ -27,4 +27,4 @@ Finally open the localhost:5173 to use the app. You should be greeted by the Inv
 Developed using Vue.js (Vuex, Vue-router), Django, SQL, Axios, Tailwind, and jsPDF.
 
 ### Motivation 💡
-Developed as a learning experience for myself, and to not use other invoicing softwares again which are paid and geo-restricted.
+Created Invoicely as a self-directed learning project, aimed at freeing users from paid and geo-restricted invoicing software.

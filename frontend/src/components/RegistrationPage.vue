@@ -119,8 +119,8 @@ export default {
         this.showPopup = true
         this.iconType = 'success'
         this.popupTitle = 'Success'
-        this.popupDescription = 'Successfully created an account. Log in to continue.',
-        this.buttonText = 'Log in'
+        ;(this.popupDescription = 'Successfully created an account. Log in to continue.'),
+          (this.buttonText = 'Log in')
       } catch (error) {
         // Handle unsuccessful login.
         // Show popup and update iconType to failure.

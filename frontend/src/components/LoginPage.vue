@@ -67,14 +67,14 @@
         </button>
       </div>
     </div>
-    <GenericPopup 
+    <GenericPopup
       v-if="showPopup"
-      :popupTitle = "popupTitle"
-      :popupDescription = "popupDescription"
-      :buttonText = "buttonText"
-      :iconType = "iconType"
-      @closePopup = "closePopup"
-      @buttonClick = "closePopup"
+      :popupTitle="popupTitle"
+      :popupDescription="popupDescription"
+      :buttonText="buttonText"
+      :iconType="iconType"
+      @closePopup="closePopup"
+      @buttonClick="closePopup"
     />
   </div>
 </template>
@@ -83,7 +83,7 @@
 import axios from 'axios'
 import GenericPopup from './GenericPopup.vue'
 export default {
-  components:{
+  components: {
     GenericPopup
   },
   data() {
@@ -108,13 +108,12 @@ export default {
         })
         // Returns authenticated variable and ProfileID
         // Handle successful login
-        if(response.data.authenticated){
+        if (response.data.authenticated) {
           this.$store.commit('setAuthenticated', true)
           const profileId = response.data.profileId
-          this.$router.push({path: `/${profileId}/dashboard`})
+          this.$router.push({ path: `/${profileId}/dashboard` })
         }
-      }
-      catch (error) {
+      } catch (error) {
         // Handle authentication error
         this.popupTitle = 'Unsuccessful'
         this.popupDescription = error.response.data.errorDescription
@@ -126,7 +125,7 @@ export default {
     navigateToRegistration() {
       this.$router.push('/signup')
     },
-    closePopup(){
+    closePopup() {
       this.showPopup = false
     }
   }

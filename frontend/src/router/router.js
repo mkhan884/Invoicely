@@ -7,7 +7,7 @@ import store from '../store/store'
 const routes = [
   { path: '/signup', component: RegistrationPage },
   { path: '/login', component: LoginPage },
-  { path: '/:profileId/dashboard' , component: Dashboard, meta: { requiresAuth: true }},
+  { path: '/:profileId/dashboard', component: Dashboard, meta: { requiresAuth: true } },
   { path: '', redirect: '/login' }
 ]
 
@@ -17,7 +17,7 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  if (to.matched.some(record => record.meta.requiresAuth)) {
+  if (to.matched.some((record) => record.meta.requiresAuth)) {
     // If the route requires authentication, check if the user is authenticated
     if (store.state.isAuthenticated) {
       // If authenticated, proceed with navigation
@@ -31,6 +31,5 @@ router.beforeEach((to, from, next) => {
     next()
   }
 })
-
 
 export default router

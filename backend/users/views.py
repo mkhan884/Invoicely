@@ -1,5 +1,5 @@
 from django.http import JsonResponse
-from .models import profile
+from .models import profile, customer
 import json
 
 # Login Method to authenticate user
@@ -67,7 +67,34 @@ def addUser(request):
     else:
         # Return error for unsupported request method
         return JsonResponse({'error': 'Only POST requests are supported'}, status=405)
-
 # Helper method to check passwords
 def test_password(password, hashedPassword):
     return password == hashedPassword
+
+def addCustomer(request, profile_id):
+    if request.method == 'POST':
+        # Extract customer data from the POST request
+        payload = json.loads(request.body)
+        name = payload.get('name')
+        address = payload.get('address')
+        city = payload.get('city')
+        country = payload.get('country')
+
+        # Get the profile associated with the given profile_id
+        try:
+            profile_obj = profile.objects.get(unique_id=profile_id)
+        except:
+            # Handle case where profile with given profile_id doesn't exist
+            return JsonResponse({'error':'User with that profile_id does not exist.'}, status=400)
+
+        # Create a new customer associated with the profile
+        new_customer = customer.objects.create(
+            profile_id=profile_obj.unique_id,
+            name=name,
+            address=address,
+            city=city,
+            country=country
+        )
+        return JsonResponse({'success': 'Customer added successfully'}, status=200)
+    else:
+        return JsonResponse({'error':'Only POST methods are supported.'}, status=400)

@@ -98,10 +98,6 @@ export default {
       type: String,
       default: 'Continue'
     },
-    status: {
-      type: String,
-      default: 'Success'
-    },
     iconType: {
       type: String,
       default: 'success' // Default to success, change this to 'failure' from the parent component to display the failure icon

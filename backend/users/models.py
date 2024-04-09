@@ -9,8 +9,9 @@ class profile(models.Model):
     password = models.CharField(max_length=255)
 
     def __str__(self):
-        return f" {self.unique_id} {self.name} {self.email} {self.password}"
-    
+        return f"ID: {self.unique_id},  Name: {self.name}, Email: {self.email}"
+
+
 class customer (models.Model):
     profile_id = models.IntegerField(unique=True)
     name = models.CharField(max_length=255) 

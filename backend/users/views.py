@@ -19,19 +19,19 @@ def authenticate(request):
                 if user_object:
                     password_matches = test_password(password, user_object.password)
                     if (password_matches):
-                        return JsonResponse({'authenticated': True}, status=200)
+                        return JsonResponse({'authenticated': True, 'profileId': user_object.unique_id}, status=200)
                     else:
-                        return JsonResponse({'authenticated': False, 'status': 'Incorrect password entered.'}, status=400) 
+                        return JsonResponse({'authenticated': False, 'errorDescription': 'Incorrect password entered. Please try again.'}, status=400) 
                 else:
-                    return JsonResponse ({'authenticated': False, 'status': 'Incorrect email or password'}, status=400)
+                    return JsonResponse ({'authenticated': False, 'errorDescription': 'Incorrect email or password entered. Please try again.'}, status=400)
             else:
-                return JsonResponse({'error': 'Email and password are required fields'}, status=400)
+                return JsonResponse({'errorDescription': 'Email and password are required fields'}, status=400)
         except Exception as e:
             # Return error if an exception occurs
-            return JsonResponse({'error': str(e)}, status=500)
+            return JsonResponse({'errorDescription': str(e)}, status=500)
     else:
         # Return error for unsupported request method
-        return JsonResponse({'error': 'Only POST requests are supported'}, status=405)
+        return JsonResponse({'errorDescription': 'Only POST requests are supported'}, status=405)
 
 # Sign up method to add user to db
 def addUser(request):

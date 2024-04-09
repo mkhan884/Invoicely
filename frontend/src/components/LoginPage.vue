@@ -67,39 +67,67 @@
         </button>
       </div>
     </div>
+    <GenericPopup 
+      v-if="showPopup"
+      :popupTitle = "popupTitle"
+      :popupDescription = "popupDescription"
+      :buttonText = "buttonText"
+      :iconType = "iconType"
+      @closePopup = "closePopup"
+      @buttonClick = "closePopup"
+    />
   </div>
 </template>
 
 <script>
 import axios from 'axios'
+import GenericPopup from './GenericPopup.vue'
 export default {
-
+  components:{
+    GenericPopup
+  },
   data() {
     return {
       email: '',
       password: '',
-      error: ''
+      error: '',
+      popupTitle: '',
+      popupDescription: '',
+      buttonText: '',
+      iconType: '',
+      showPopup: false
     }
   },
   methods: {
     async login() {
       try {
-        // Make a POST request to the user/authenticate endpoint in the Django backend
+        // Make a POST request to the user/authenticate endpoint in the backend
         const response = await axios.post('http://localhost:8000/user/authenticate', {
           email: this.email,
           password: this.password
         })
-
+        // Returns authenticated variable and ProfileID
         // Handle successful login
-        console.log(response.data)
-      } catch (error) {
+        if(response.data.authenticated){
+          this.$store.commit('setAuthenticated', true)
+          const profileId = response.data.profileId
+          this.$router.push({path: `/${profileId}/dashboard`})
+        }
+      }
+      catch (error) {
         // Handle authentication error
-        console.error('Login failed:', error.response.data)
-        this.error = error.response.data.detail // Display error message to the user
+        this.popupTitle = 'Unsuccessful'
+        this.popupDescription = error.response.data.errorDescription
+        this.buttonText = 'Try Again'
+        this.iconType = 'Failure'
+        this.showPopup = true
       }
     },
     navigateToRegistration() {
       this.$router.push('/signup')
+    },
+    closePopup(){
+      this.showPopup = false
     }
   }
 }

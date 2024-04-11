@@ -1,5 +1,5 @@
 # Invoicely
-Invoicely is a user-friendly invoicing application designed to streamline the invoicing process for businesses of all sizes. Whether you're a freelancer or a small business owner, Invoicely simplifies the task of creating, and managing invoices. 🚀
+Invoicely is a user-friendly invoicing application designed to streamline the invoicing process for businesses of all sizes. Whether you're a freelancer, contractor, or a small business owner, Invoicely simplifies the task of creating, and managing invoices. 🚀
 
 ### Key Features 🔑
 1. **Intuitive Interface**: Invoicely boasts a clean and intuitive user interface, making it easy for users to navigate and utilize its features effectively.
@@ -27,4 +27,4 @@ Finally open the localhost:5173 to use the app. You should be greeted by the Inv
 Developed using Vue.js (Vuex, Vue-router), Django, SQL, Axios, Tailwind, and jsPDF.
 
 ### Motivation 💡
-Created Invoicely as a self-directed learning project, aimed at freeing users from paid and geo-restricted invoicing software.
+Created Invoicely as a self-directed learning project, aimed at freeing users from paid, geo-restricted and complicated invoicing software.

@@ -67,10 +67,12 @@ def addUser(request):
     else:
         # Return error for unsupported request method
         return JsonResponse({'error': 'Only POST requests are supported'}, status=405)
+
 # Helper method to check passwords
 def test_password(password, hashedPassword):
     return password == hashedPassword
 
+# Method to add a new customer
 def addCustomer(request, profile_id):
     if request.method == 'POST':
         # Extract customer data from the POST request
@@ -98,3 +100,12 @@ def addCustomer(request, profile_id):
         return JsonResponse({'success': 'Customer added successfully'}, status=200)
     else:
         return JsonResponse({'error':'Only POST methods are supported.'}, status=400)
+    
+# Method that returns all customers a user has (filtered by profile_id).
+def getCustomers(request, profile_id):
+    try:
+        customers = list(customer.objects.filter(profile_id=profile_id).values('profile_id', 'name', 'address', 'city', 'country', 'phone_number'))
+    except customer.DoesNotExist:
+        customers = None
+
+    return JsonResponse({'customers': customers})

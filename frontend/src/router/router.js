@@ -3,11 +3,13 @@ import LoginPage from '../components/LoginPage.vue'
 import RegistrationPage from '../components/RegistrationPage.vue'
 import Dashboard from '@/components/Dashboard.vue'
 import store from '../store/store'
+import Customers from '@/components/Customers.vue'
 
 const routes = [
   { path: '/signup', component: RegistrationPage },
   { path: '/login', component: LoginPage },
   { path: '/:profileId/dashboard', component: Dashboard, meta: { requiresAuth: true } },
+  { path: '/:profileId/customers', component: Customers, meta: { requiresAuth: true } },
   { path: '', redirect: '/login' }
 ]
 

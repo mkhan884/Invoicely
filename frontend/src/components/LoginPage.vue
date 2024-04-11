@@ -1,8 +1,8 @@
 <template>
   <div class="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
     <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-      <img class="mx-auto h-12 w-auto" src="../assets/logo/invoicely.jpeg" alt="Invoicely Logo" />
-      <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+      <img class="mx-auto h-10 w-auto" src="../assets/logo/invoicely-purple.png" alt="Invoicely Logo" />
+      <h2 class="mt-6 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
         Sign in to your account
       </h2>
     </div>
@@ -110,8 +110,8 @@ export default {
         // Handle successful login
         if (response.data.authenticated) {
           this.$store.commit('setAuthenticated', true)
-          const profileId = response.data.profileId
-          this.$router.push({ path: `/${profileId}/dashboard` })
+          this.$store.commit('setProfileId', response.data.profileId)
+          this.$router.push({ path: `/${response.data.profileId}/dashboard` })
         }
       } catch (error) {
         // Handle authentication error

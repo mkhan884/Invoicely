@@ -81,6 +81,7 @@ def addCustomer(request, profile_id):
         address = payload.get('address')
         city = payload.get('city')
         country = payload.get('country')
+        phone_number = payload.get('phone_number')
 
         # Get the profile associated with the given profile_id
         try:
@@ -91,11 +92,12 @@ def addCustomer(request, profile_id):
 
         # Create a new customer associated with the profile
         new_customer = customer.objects.create(
-            profile_id=profile_obj.unique_id,
+            profile_id=profile_obj,
             name=name,
             address=address,
             city=city,
-            country=country
+            country=country,
+            phone_number = phone_number
         )
         return JsonResponse({'success': 'Customer added successfully'}, status=200)
     else:

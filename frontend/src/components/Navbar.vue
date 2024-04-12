@@ -13,7 +13,7 @@
         </div>
         <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
           <div class="flex-shrink-0 flex items-center">
-            <img class="h-8 w-auto" src="../assets/logo/invoicely-white.png" alt="Invoicely" />
+            <img class="h-6 w-auto" src="../assets/logo/invoicely-white.png" alt="Invoicely" />
           </div>
           <div class="hidden sm:ml-6 sm:block">
             <div class="flex space-x-4">
@@ -132,8 +132,6 @@ import {
   MenuItem,
   MenuItems
 } from '@headlessui/vue'
-import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/vue/24/outline'
-
 export default {
   components: {
     Disclosure,
@@ -166,8 +164,9 @@ export default {
       this.$router.push(route)
     },
     logout() {
-      // Clear authentication state
+      // Clear authentication state and global profile ID
       this.$store.commit('setAuthenticated', false)
+      this.$store.commit('setProfileId', '')
       // Redirect to login
       this.$router.push('/login')
     }

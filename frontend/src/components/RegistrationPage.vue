@@ -109,7 +109,7 @@ export default {
     async register() {
       try {
         // Make a POST request to the user/addUser endpoint in the backend
-        const response = await axios.post('http://localhost:8000/user/addUser', {
+        await axios.post('http://localhost:8000/user/addUser', {
           name: this.name,
           email: this.email,
           password: this.password
@@ -119,8 +119,8 @@ export default {
         this.showPopup = true
         this.iconType = 'success'
         this.popupTitle = 'Success'
-        ;(this.popupDescription = 'Successfully created an account. Log in to continue.'),
-          (this.buttonText = 'Log in')
+        this.popupDescription = 'Successfully created an account. Log in to continue.'
+        this.buttonText = 'Log in'
       } catch (error) {
         // Handle unsuccessful login.
         // Show popup and update iconType to failure.

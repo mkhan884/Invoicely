@@ -9,12 +9,12 @@ const store = createStore({
     setAuthenticated(state, isAuthenticated) {
       state.isAuthenticated = isAuthenticated
     },
-    setProfileId(state, profileId){
+    setProfileId(state, profileId) {
       state.profileId = profileId
     }
   },
-  getters:{
-    getProfileId(state){
+  getters: {
+    getProfileId(state) {
       return state.profileId
     }
   }

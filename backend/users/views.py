@@ -1,8 +1,9 @@
 from django.http import JsonResponse
+from django.shortcuts import get_object_or_404
 from .models import profile, customer
 import json
 
-# Login Method to authenticate user
+# Login Method to authenticate user.
 def authenticate(request):
     if request.method == 'POST':
         try:
@@ -33,7 +34,7 @@ def authenticate(request):
         # Return error for unsupported request method
         return JsonResponse({'errorDescription': 'Only POST requests are supported'}, status=405)
 
-# Sign up method to add user to db
+# Sign up method to add user to db.
 def addUser(request):
     if request.method == 'POST':
         try:
@@ -68,11 +69,11 @@ def addUser(request):
         # Return error for unsupported request method
         return JsonResponse({'error': 'Only POST requests are supported'}, status=405)
 
-# Helper method to check passwords
+# Helper method to check passwords.
 def test_password(password, hashedPassword):
     return password == hashedPassword
 
-# Method to add a new customer
+# Method to add a new customer.
 def addCustomer(request, profile_id):
     if request.method == 'POST':
         # Extract customer data from the POST request
@@ -111,3 +112,35 @@ def getCustomers(request, profile_id):
         customers = None
 
     return JsonResponse({'customers': customers})
+
+# Method that updates a given customer.
+def updateCustomer(request, profile_id):
+    if request.method == 'POST':
+        # Get all customers associated with the profile_id
+        response = getCustomers(request, profile_id)
+        
+        customers_json = json.loads(response.content)  # Convert JSON response to Python dictionary
+        customers = customers_json.get('customers', [])  # Extract customers list
+        json_data = (json.loads(request.body)) # The request that is being sent, old and new info
+
+        if customers:
+            # Get the specific customer to update (you can customize this filter based on your requirements)
+            specific_customer = [c for c in customers if c['name'] == json_data.get('name') and c['address'] == json_data.get('address')]
+            if specific_customer:
+                specific_customer = specific_customer[0]  # Extract the first matching customer
+
+                customer_instance = get_object_or_404(customer, profile_id=profile_id, name=specific_customer['name'], address=specific_customer['address'])
+                customer_instance.name = json_data.get('new_name')
+                customer_instance.address = json_data.get('new_address')
+                customer_instance.city = json_data.get('new_city')
+                customer_instance.country = json_data.get('new_country')
+                customer_instance.phone_number = json_data.get('new_phone_number')
+                customer_instance.save()
+
+                return JsonResponse({'message': 'Customer updated successfully'})
+            else:
+                return JsonResponse({'error': 'Customer not found'}, status=404)
+        else:
+            return JsonResponse({'error': 'No customers found'}, status=404)
+    else:
+        return JsonResponse({'error': 'Method not allowed'}, status=405)

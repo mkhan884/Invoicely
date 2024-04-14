@@ -147,7 +147,8 @@ export default {
           href: `/${this.$route.params.profileId}/customers`,
           current: this.$route.path.includes('customers')
         },
-        { name: 'Invoices', href: '#', current: false }
+        { name: 'Invoices', href:  `/${this.$route.params.profileId}/invoices`, 
+          current: this.$route.path.includes('invoices')}
       ]
     }
   },

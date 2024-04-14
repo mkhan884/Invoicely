@@ -51,7 +51,7 @@
             <td class="px-6 py-4">{{ customer.country }}</td>
             <td class="px-6 py-4">{{ customer.phone_number }}</td>
             <td class="px-6 py-4">
-              <button @click="openEditModal">
+              <button @click="openEditModal(customer)">
                 <a
                   class="text-indigo-600 hover:text-indigo-900 dark:text-indigo-400 dark:hover:text-indigo-600 font-semibold transition duration-300 ease-in-out"
                   >Edit</a
@@ -111,6 +111,7 @@
                 >
                 <input
                   v-model="name"
+                  @input="validateForm"
                   type="text"
                   name="name"
                   id="name"
@@ -128,6 +129,7 @@
                 <input
                   v-model="address"
                   type="text"
+                  @input="validateForm"
                   name="address"
                   id="address"
                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
@@ -144,6 +146,7 @@
                 <input
                   v-model="city"
                   type="text"
+                  @input="validateForm"
                   name="city"
                   id="city"
                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
@@ -161,6 +164,7 @@
                   v-model="country"
                   type="text"
                   name="Country"
+                  @input="validateForm"
                   id="Country"
                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                   placeholder="Country"
@@ -176,6 +180,7 @@
                 <input
                   v-model="phone_number"
                   type="text"
+                  @input="validateForm"
                   name="phone_number"
                   id="phone_number"
                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
@@ -264,6 +269,7 @@
                 <input
                   v-model="name"
                   type="text"
+                  @input="validateForm"
                   name="name"
                   id="name"
                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
@@ -280,6 +286,7 @@
                 <input
                   v-model="address"
                   type="text"
+                  @input="validateForm"
                   name="address"
                   id="address"
                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
@@ -296,6 +303,7 @@
                 <input
                   v-model="city"
                   type="text"
+                  @input="validateForm"
                   name="city"
                   id="city"
                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
@@ -312,6 +320,7 @@
                 <input
                   v-model="country"
                   type="text"
+                  @input="validateForm"
                   name="Country"
                   id="Country"
                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
@@ -328,6 +337,7 @@
                 <input
                   v-model="phone_number"
                   type="text"
+                  @input="validateForm"
                   name="phone_number"
                   id="phone_number"
                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
@@ -338,7 +348,7 @@
             </div>
             <div class="col-span-2 flex justify-between">
               <button
-                @click="addCustomerToDB"
+                @click="updateCustomerToDB"
                 type="button"
                 :class="{
                   'bg-indigo-600 hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50 cursor-pointer':
@@ -365,7 +375,7 @@
 
               <!-- Delete button -->
               <button
-                @click="deleteCustomer"
+                @click="deleteCustomerFromDB"
                 type="button"
                 class="bg-red-600 hover:bg-red-700 focus:ring-2 focus:ring-red-500 focus:ring-opacity-50 cursor-pointer text-white font-medium rounded-lg text-sm px-5 py-2.5 text-center transition duration-300 ease-in-out"
               >
@@ -412,6 +422,8 @@ export default {
       popupDescription: '',
       buttonText: '',
       iconType: '',
+      currentName: '',
+      currentAddress: '',
       showPopup: false, // Confirmation popup
       addCustomerModal: false,
       editModal: false,
@@ -420,21 +432,6 @@ export default {
   },
   created() {
     this.getCustomersFromDB()
-  },
-  watch: {
-    name: 'validateForm',
-    address: 'validateForm',
-    city: 'validateForm',
-    country: 'validateForm',
-    phone_number: 'validateForm',
-
-    customers: {
-      handler: function () {
-        // Call any method or perform any action that should happen when customers data changes
-        this.getCustomersFromDB()
-      },
-      deep: true // Watch for changes in nested properties of customers
-    }
   },
   methods: {
     async getCustomersFromDB() {
@@ -458,39 +455,92 @@ export default {
         })
         this.addCustomerModal = false
         this.clearForm()
+        this.getCustomersFromDB()
+
         // Add popup information that provides confirmation
         this.popupTitle = 'Customer Added'
         this.popupDescription = 'Succesfully Added a new customer.'
-        ;(this.iconType = 'success'), (this.buttonText = 'Continue')
+        this.iconType = 'success'
+        this.buttonText = 'Continue'
         this.showPopup = true
       } catch (error) {
         console.error('POST request unsuccessful', error.message)
       }
     },
-    validateForm() {
+    async updateCustomerToDB(){
+        const profileId = this.$store.getters['getProfileId']
+        try {
+            axios.post(`http://localhost:8000/user/${profileId}/updateCustomer/`,{
+                name: this.currentName,
+                address: this.currentAddress,
+                new_name: this.name,
+                new_address: this.address,
+                new_city: this.city,
+                new_country: this.country,
+                new_phone_number: this.phone_number
+            })
+
+            this.editModal = false
+            this.clearForm()
+            this.getCustomersFromDB()
+
+            // Add popup information that provides confirmation
+            this.popupTitle = 'Customer Updated'
+            this.popupDescription = 'Succesfully updated an existing customer.'
+            this.iconType = 'success'
+            this.buttonText = 'Continue'
+            this.showPopup = true
+
+        } catch (error) {
+            console.error('POST request unsuccessful', error.message)
+        }
+    },
+    async deleteCustomerFromDB(){
+        const profileId = this.$store.getters['getProfileId']
+        try {
+            axios.post(`http://localhost:8000/user/${profileId}/deleteCustomer/`,{
+                name: this.currentName,
+                address: this.currentAddress
+            })
+            this.editModal = false
+            this.clearForm()
+            this.getCustomersFromDB()
+        } catch (error) {
+            console.error('Delete request unsuccessful', error.message)
+        }
+    },
+    validateForm(){
       this.isFormValid =
         !!this.name && !!this.address && !!this.city && !!this.country && !!this.phone_number
     },
-    clearForm() {
+    clearForm(){
       this.name = ''
       this.address = ''
       this.city = ''
       this.country = ''
       this.phone_number = ''
     },
-    openAddCustomerModal() {
+    openAddCustomerModal(){
       this.addCustomerModal = true
     },
-    closeAddCustomerModal() {
+    closeAddCustomerModal(){
       this.addCustomerModal = false
     },
-    openEditModal() {
-      this.editModal = true
+    openEditModal(customer){
+        this.currentName = customer.name
+        this.currentAddress = customer.address
+        this.name = customer.name
+        this.address = customer.address
+        this.city = customer.city
+        this.country = customer.country
+        this.phone_number = customer.phone_number
+        this.editModal = true
     },
-    closeEditModal() {
+    closeEditModal(){
       this.editModal = false
+      this.clearForm()
     },
-    closePopup() {
+    closePopup(){
       this.showPopup = false
     }
   }

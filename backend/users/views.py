@@ -144,3 +144,31 @@ def updateCustomer(request, profile_id):
             return JsonResponse({'error': 'No customers found'}, status=404)
     else:
         return JsonResponse({'error': 'Method not allowed'}, status=405)
+
+# Get all customers associated with the profile_id.
+# Parse json of the request being sent.
+# Match customer with the customer in the request.
+# Select customer and delete it from db.
+def deleteCustomer(request, profile_id):
+    if request.method == 'POST':
+        response = getCustomers(request, profile_id)
+        
+        customers_json = json.loads(response.content)  # Convert JSON response to Python dictionary
+        customers = customers_json.get('customers', [])  # Extract customers list
+        json_data = (json.loads(request.body)) # The request that is being sent, customer info
+
+        if customers:
+            # Get the specific customer to delete.
+            specific_customer = [c for c in customers if c['name'] == json_data.get('name') and c['address'] == json_data.get('address')]
+            if specific_customer:
+                specific_customer = specific_customer[0]  # Extract the first matching customer
+                customer_instance = get_object_or_404(customer, profile_id=profile_id, name=specific_customer['name'], address=specific_customer['address'])
+                customer_instance.delete()
+
+                return JsonResponse({"message": "Customer deleted successfully"}, status=200)
+            else:
+                return JsonResponse({"error": "Customer not found"}, status=404)
+        else:
+            return JsonResponse({"error": "No customers found"}, status=404)
+    else:
+        return JsonResponse({'error': 'Method not allowed'}, status=405)

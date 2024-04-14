@@ -53,10 +53,10 @@
             <td class="px-6 py-4">
               <button @click="openEditModal">
                 <a
-                class="text-indigo-600 hover:text-indigo-900 dark:text-indigo-400 dark:hover:text-indigo-600 font-semibold transition duration-300 ease-in-out"
-                >Edit</a
-              >
-            </button>
+                  class="text-indigo-600 hover:text-indigo-900 dark:text-indigo-400 dark:hover:text-indigo-600 font-semibold transition duration-300 ease-in-out"
+                  >Edit</a
+                >
+              </button>
             </td>
           </tr>
         </tbody>
@@ -336,31 +336,42 @@
                 />
               </div>
             </div>
-            <button
-              @click="addCustomerToDB"
-              type="button"
-              :class="{
-                'bg-indigo-600 hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50 cursor-pointer':
-                  isFormValid,
-                'bg-gray-300 text-gray-500 cursor-not-allowed': !isFormValid
-              }"
-              :disabled="!isFormValid"
-              class="inline-flex items-center text-white font-medium rounded-lg text-sm px-5 py-2.5 text-center transition duration-300 ease-in-out"
-            >
-              <svg
-                class="me-1 -ms-1 w-5 h-5"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg"
+            <div class="col-span-2 flex justify-between">
+              <button
+                @click="addCustomerToDB"
+                type="button"
+                :class="{
+                  'bg-indigo-600 hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50 cursor-pointer':
+                    isFormValid,
+                  'bg-gray-300 text-gray-500 cursor-not-allowed': !isFormValid
+                }"
+                :disabled="!isFormValid"
+                class="inline-flex items-center text-white font-medium rounded-lg text-sm px-5 py-2.5 text-center transition duration-300 ease-in-out"
               >
-                <path
-                  fill-rule="evenodd"
-                  d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
-                  clip-rule="evenodd"
-                ></path>
-              </svg>
-              Update
-            </button>
+                <svg
+                  class="me-1 -ms-1 w-5 h-5"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+                    clip-rule="evenodd"
+                  ></path>
+                </svg>
+                Update
+              </button>
+
+              <!-- Delete button -->
+              <button
+                @click="deleteCustomer"
+                type="button"
+                class="bg-red-600 hover:bg-red-700 focus:ring-2 focus:ring-red-500 focus:ring-opacity-50 cursor-pointer text-white font-medium rounded-lg text-sm px-5 py-2.5 text-center transition duration-300 ease-in-out"
+              >
+                Delete Customer
+              </button>
+            </div>
           </form>
         </div>
       </div>
@@ -450,8 +461,7 @@ export default {
         // Add popup information that provides confirmation
         this.popupTitle = 'Customer Added'
         this.popupDescription = 'Succesfully Added a new customer.'
-        this.iconType = 'success',
-        this.buttonText = 'Continue'
+        ;(this.iconType = 'success'), (this.buttonText = 'Continue')
         this.showPopup = true
       } catch (error) {
         console.error('POST request unsuccessful', error.message)
@@ -461,12 +471,12 @@ export default {
       this.isFormValid =
         !!this.name && !!this.address && !!this.city && !!this.country && !!this.phone_number
     },
-    clearForm(){
-        this.name = '';
-        this.address = '';
-        this.city = '';
-        this.country = '';
-        this.phone_number = '';
+    clearForm() {
+      this.name = ''
+      this.address = ''
+      this.city = ''
+      this.country = ''
+      this.phone_number = ''
     },
     openAddCustomerModal() {
       this.addCustomerModal = true
@@ -474,14 +484,14 @@ export default {
     closeAddCustomerModal() {
       this.addCustomerModal = false
     },
-    openEditModal(){
-        this.editModal = true
+    openEditModal() {
+      this.editModal = true
     },
-    closeEditModal(){
-        this.editModal = false
+    closeEditModal() {
+      this.editModal = false
     },
-    closePopup(){
-        this.showPopup = false;
+    closePopup() {
+      this.showPopup = false
     }
   }
 }

@@ -13,7 +13,7 @@
         </div>
         <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
           <div class="flex-shrink-0 flex items-center">
-            <img class="h-6 w-auto" src="../assets/logo/invoicely-white.png" alt="Invoicely" />
+            <img class="h-5 w-auto" src="../assets/logo/invoicely-white.png" alt="Invoicely" />
           </div>
           <div class="hidden sm:ml-6 sm:block">
             <div class="flex space-x-4">
@@ -72,8 +72,9 @@
                 <MenuItem v-slot="{ active }">
                   <a
                     href="#"
+                    @click="navigateTo(`/${this.$route.params.profileId}/business-settings`)"
                     :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']"
-                    >Settings</a
+                    >Business settings</a
                   >
                 </MenuItem>
                 <MenuItem v-slot="{ active }">
@@ -147,8 +148,11 @@ export default {
           href: `/${this.$route.params.profileId}/customers`,
           current: this.$route.path.includes('customers')
         },
-        { name: 'Invoices', href:  `/${this.$route.params.profileId}/invoices`, 
-          current: this.$route.path.includes('invoices')}
+        {
+          name: 'Invoices',
+          href: `/${this.$route.params.profileId}/invoices`,
+          current: this.$route.path.includes('invoices')
+        }
       ]
     }
   },

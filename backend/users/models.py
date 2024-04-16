@@ -25,3 +25,17 @@ class customer (models.Model):
 
     def get_profile(self):
         return profile.objects.get(unique_id=self.profile_id)
+    
+class business(models.Model):
+    profile_id = models.ForeignKey(profile, on_delete=models.CASCADE)
+    business_unique_id = models.AutoField(primary_key=True)
+    business_name = models.CharField(max_length=255)
+    business_phone_number = models.CharField(max_length=255)
+    business_address = models.CharField(max_length=255)
+    business_city = models.CharField(max_length=255)
+    business_country = models.CharField(max_length=255)
+    currency = models.CharField(max_length=255)
+    organization_type = models.CharField(max_length=255)
+
+    def __str__(self):
+        return f" {self.profile_id.unique_id} {self.business_unique_id} {self.business_name} {self.business_address} {self.business_city} {self.business_country} {self.business_phone_number} {self.organization_type}"

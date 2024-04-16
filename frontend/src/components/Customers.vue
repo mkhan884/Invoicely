@@ -467,80 +467,79 @@ export default {
         console.error('POST request unsuccessful', error.message)
       }
     },
-    async updateCustomerToDB(){
-        const profileId = this.$store.getters['getProfileId']
-        try {
-            axios.post(`http://localhost:8000/user/${profileId}/updateCustomer/`,{
-                name: this.currentName,
-                address: this.currentAddress,
-                new_name: this.name,
-                new_address: this.address,
-                new_city: this.city,
-                new_country: this.country,
-                new_phone_number: this.phone_number
-            })
+    async updateCustomerToDB() {
+      const profileId = this.$store.getters['getProfileId']
+      try {
+        axios.post(`http://localhost:8000/user/${profileId}/updateCustomer/`, {
+          name: this.currentName,
+          address: this.currentAddress,
+          new_name: this.name,
+          new_address: this.address,
+          new_city: this.city,
+          new_country: this.country,
+          new_phone_number: this.phone_number
+        })
 
-            this.editModal = false
-            this.clearForm()
-            this.getCustomersFromDB()
+        this.editModal = false
+        this.clearForm()
+        this.getCustomersFromDB()
 
-            // Add popup information that provides confirmation
-            this.popupTitle = 'Customer Updated'
-            this.popupDescription = 'Succesfully updated an existing customer.'
-            this.iconType = 'success'
-            this.buttonText = 'Continue'
-            this.showPopup = true
-
-        } catch (error) {
-            console.error('POST request unsuccessful', error.message)
-        }
+        // Add popup information that provides confirmation
+        this.popupTitle = 'Customer Updated'
+        this.popupDescription = 'Succesfully updated an existing customer.'
+        this.iconType = 'success'
+        this.buttonText = 'Continue'
+        this.showPopup = true
+      } catch (error) {
+        console.error('POST request unsuccessful', error.message)
+      }
     },
-    async deleteCustomerFromDB(){
-        const profileId = this.$store.getters['getProfileId']
-        try {
-            axios.post(`http://localhost:8000/user/${profileId}/deleteCustomer/`,{
-                name: this.currentName,
-                address: this.currentAddress
-            })
-            this.editModal = false
-            this.clearForm()
-            this.getCustomersFromDB()
-        } catch (error) {
-            console.error('Delete request unsuccessful', error.message)
-        }
+    async deleteCustomerFromDB() {
+      const profileId = this.$store.getters['getProfileId']
+      try {
+        axios.post(`http://localhost:8000/user/${profileId}/deleteCustomer/`, {
+          name: this.currentName,
+          address: this.currentAddress
+        })
+        this.editModal = false
+        this.clearForm()
+        this.getCustomersFromDB()
+      } catch (error) {
+        console.error('Delete request unsuccessful', error.message)
+      }
     },
-    validateForm(){
+    validateForm() {
       this.isFormValid =
         !!this.name && !!this.address && !!this.city && !!this.country && !!this.phone_number
     },
-    clearForm(){
+    clearForm() {
       this.name = ''
       this.address = ''
       this.city = ''
       this.country = ''
       this.phone_number = ''
     },
-    openAddCustomerModal(){
+    openAddCustomerModal() {
       this.addCustomerModal = true
     },
-    closeAddCustomerModal(){
+    closeAddCustomerModal() {
       this.addCustomerModal = false
     },
-    openEditModal(customer){
-        this.currentName = customer.name
-        this.currentAddress = customer.address
-        this.name = customer.name
-        this.address = customer.address
-        this.city = customer.city
-        this.country = customer.country
-        this.phone_number = customer.phone_number
-        this.editModal = true
+    openEditModal(customer) {
+      this.currentName = customer.name
+      this.currentAddress = customer.address
+      this.name = customer.name
+      this.address = customer.address
+      this.city = customer.city
+      this.country = customer.country
+      this.phone_number = customer.phone_number
+      this.editModal = true
     },
-    closeEditModal(){
+    closeEditModal() {
       this.editModal = false
       this.clearForm()
     },
-    closePopup(){
+    closePopup() {
       this.showPopup = false
     }
   }

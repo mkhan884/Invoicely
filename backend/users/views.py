@@ -1,6 +1,6 @@
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
-from .models import profile, customer
+from .models import profile, customer, business
 import json
 
 # Login Method to authenticate user.
@@ -92,7 +92,7 @@ def addCustomer(request, profile_id):
             return JsonResponse({'error':'User with that profile_id does not exist.'}, status=400)
 
         # Create a new customer associated with the profile
-        new_customer = customer.objects.create(
+        customer.objects.create(
             profile_id=profile_obj,
             name=name,
             address=address,
@@ -172,3 +172,56 @@ def deleteCustomer(request, profile_id):
             return JsonResponse({"error": "No customers found"}, status=404)
     else:
         return JsonResponse({'error': 'Method not allowed'}, status=405)
+    
+def addBusiness(request, profile_id):
+    if request.method == 'POST':
+        try:
+            # Parse JSON payload
+            payload = json.loads(request.body)
+            name = payload.get('name')
+            phoneNumber = payload.get('phone_number')
+            address = payload.get('address')
+            city = payload.get('city')
+            country = payload.get('country')
+            organization = payload.get('organization')
+            currency = payload.get('currency')
+
+            # Check if all required fields are provided
+            if name and phoneNumber and address and city and country and organization and currency:
+                # Check if the profile already has a business associated with it
+                if business.objects.filter(profile_id_id=profile_id).exists():
+                    return JsonResponse({'error':'User already has a business associated with it'}, status=400)
+                else:
+                    # Create a new business object
+                    new_business = business(
+                        profile_id_id=profile_id,
+                        business_name=name,
+                        business_phone_number=phoneNumber,
+                        business_address=address,
+                        business_city=city,
+                        business_country=country,
+                        organization_type=organization,
+                        currency=currency
+                    )
+                    new_business.save()
+                    # Return success response
+                    return JsonResponse({'success': True, 'message': 'Business added successfully'}, status=200)
+            else:
+                # Return error if any required field is missing
+                return JsonResponse({'error': 'All fields are required'}, status=400)
+        except Exception as e:
+            # Return error if an exception occurs
+            return JsonResponse({'error': str(e)}, status=500)
+    else:
+        # Return error for unsupported request method
+        return JsonResponse({'error': 'Only POST requests are supported'}, status=405)
+    
+
+def getBusiness (request, profile_id):
+    if request.method == 'GET':
+        try:
+            currentBusiness = list(business.objects.filter(profile_id=profile_id).values('business_name', 'business_phone_number', 'business_address', 'business_city', 'business_country', 'organization_type', 'currency'))
+        except business.DoesNotExist:
+            currentBusiness= None
+            
+    return JsonResponse({'business': currentBusiness})

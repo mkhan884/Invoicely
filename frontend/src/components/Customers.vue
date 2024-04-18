@@ -497,13 +497,13 @@ export default {
     async deleteCustomerFromDB() {
       const profileId = this.$store.getters['getProfileId']
       try {
-        axios.post(`http://localhost:8000/user/${profileId}/deleteCustomer/`, {
+        await axios.post(`http://localhost:8000/user/${profileId}/deleteCustomer/`, {
           name: this.currentName,
           address: this.currentAddress
         })
+        this.getCustomersFromDB()
         this.editModal = false
         this.clearForm()
-        this.getCustomersFromDB()
       } catch (error) {
         console.error('Delete request unsuccessful', error.message)
       }

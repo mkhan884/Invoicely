@@ -257,3 +257,19 @@ def updateBusiness(request, profile_id):
             return JsonResponse({'error': 'Business not found.'})
     else:
         return JsonResponse({'error': 'Method not allowed.'})
+    
+def deleteBusiness(request, profile_id):
+    if request.method == 'POST':
+        current_business = get_business_data(profile_id=profile_id)
+        # Also pass the business name to make sure that the correct business is being deleted
+        json_data = json.loads(request.body)
+        check_name = json_data.get('businessName')
+
+        if current_business:
+            business_instance = get_object_or_404(business, profile_id=profile_id, business_name=check_name)
+            business_instance.delete()
+            return JsonResponse({'message': 'Successfully deleted business'})
+        else:
+            return JsonResponse({'message': 'Business does not exist'})
+    else:
+        return JsonResponse({'error': 'Method not supported'})

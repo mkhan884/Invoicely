@@ -373,7 +373,7 @@
 
             <div class="col-span-2 flex justify-between">
               <button
-                @click="updateCustomerToDB"
+                @click="updateBusiness"
                 type="button"
                 :class="{
                   'bg-black text-semibold hover:bg-white hover:text-black hover:border-black border border-transparent border-2 transition duration-300 ease-in-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black cursor-pointer':
@@ -400,7 +400,7 @@
 
               <!-- Delete button -->
               <button
-                @click="deleteCustomerFromDB"
+                @click="deleteBusiness"
                 type="button"
                 class="bg-white hover:bg-black hover:text-white cursor-pointer text-bg-black font-semibold rounded-lg text-sm px-5 py-2.5 text-center transition duration-300 ease-in-out border-2 border-black"
               >
@@ -476,7 +476,7 @@ export default {
         })
         this.popupTitle = 'Success'
         this.popupDescription = 'Business created successfully. You may begin invoicing.'
-        this.buttonText = 'continue'
+        this.buttonText = 'Continue'
         this.iconType = 'success'
         this.showPopup = true
         // Call getBusiness to update the form
@@ -509,18 +509,43 @@ export default {
       }
     },
 
-    // async updateBusiness(){
-    //     const profileId = this.$store.getters['getProfileId']
+    async updateBusiness(){
+        const profileId = this.$store.getters['getProfileId']
+        try {
+            await axios.post(`http://localhost:8000/user/${profileId}/updateBusiness/`, {
+              businessName: this.businessName,
+              streetAddress: this.streetAddress,
+              phoneNumber: this.phoneNumber,
+              city: this.city,
+              country: this.country,
+              organization: this.organization,
+              currency: this.currency
+            })
+            this.closeEditModal()
+            this.getBusiness()
+        } catch (error) {
+          console.error(error)
+        }
+    },
 
-    //     try {
-    //         await axios.post(`http://localhost:8000/user/${profileId}/updateBusiness`{
-
-    //         })
-    //     } catch (error) {
-
-    //     }
-
-    // },
+    async deleteBusiness(){
+      const profileId = this.$store.getters['getProfileId']
+      try {
+        await axios.post(`http://localhost:8000/user/${profileId}/deleteBusiness/`, {
+          businessName: this.businessName
+        })
+        this.closeEditModal()
+        this.showPopup = true
+        this.popupTitle = 'Success'
+        this.popupDescription = 'Successfully deleted business. You can create a new business.'
+        this.buttonText = 'Continue'
+        this.iconType = 'success'
+        this.getBusiness()
+        this.clearForm()
+      } catch (error) {
+        console.error(error)
+      }
+    },
 
     closePopup() {
       this.showPopup = false
@@ -548,6 +573,15 @@ export default {
         !!this.streetAddress &&
         !!this.currency &&
         !!this.organization
+    },
+    clearForm(){
+      this.businessName = ''
+      this.phoneNumber = ''
+      this.streetAddress = ''
+      this.city = ''
+      this.country = ''
+      this.organization = ''
+      this.currency = ''
     }
   }
 }

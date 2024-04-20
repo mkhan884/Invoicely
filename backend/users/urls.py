@@ -10,6 +10,7 @@ urlpatterns = [
     path('user/<int:profile_id>/deleteCustomer/', views.deleteCustomer, name='deleteCustomer'),
     path('user/<int:profile_id>/addBusiness/', views.addBusiness, name='addBusiness'),
     path('user/<int:profile_id>/getBusiness/', views.getBusiness, name='getBusiness'),
-    path('user/<int:profile_id>/updateBusiness/', views.updateBusiness, name='updateBusiness')
+    path('user/<int:profile_id>/updateBusiness/', views.updateBusiness, name='updateBusiness'),
+    path('user/<int:profile_id>/deleteBusiness/', views.deleteBusiness, name='deleteBusiness')
 
 ]

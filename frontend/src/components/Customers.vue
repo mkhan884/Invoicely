@@ -9,19 +9,19 @@
         <div class="relative w-52 mr-4">
           <input
             type="text"
-            class="w-full border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:border-indigo-600"
+            class="w-full text-sm border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:border-gray-950 focus:ring-1 focus:ring-gray-950"
             placeholder="Search customers..."
           />
-          <button class="absolute right-0 top-0 mt-2 mr-3 focus:outline-none">
+          <button class="absolute right-0 top-0 mt-2 mr-3">
             <SearchIcon class="h-6 w-6 text-gray-400" />
           </button>
         </div>
         <button
           @click="openAddCustomerModal"
           type="button"
-          class="bg-indigo-600 text-white px-4 py-2 rounded-md shadow-md hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-opacity-50 transition duration-300 ease-in-out"
+          class="bg-black font-semibold text-sm text-white px-4 py-2 rounded-md shadow-md hover:bg-white hover:text-black hover:border-black border border-transparent border-2 transition duration-300 ease-in-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
         >
-          Add Customer
+          Add customer
         </button>
       </div>
     </div>
@@ -29,7 +29,7 @@
       <table
         class="w-full text-sm text-left rtl:text-right text-gray-700 dark:text-gray-400 divide-y divide-gray-200 dark:divide-gray-700"
       >
-        <thead class="text-xs bg-indigo-600 text-white uppercase">
+        <thead class="text-xs bg-gray-900 text-white uppercase">
           <tr>
             <th scope="col" class="px-6 py-3">Customer Name</th>
             <th scope="col" class="px-6 py-3">Address</th>
@@ -51,9 +51,9 @@
             <td class="px-6 py-4">{{ customer.country }}</td>
             <td class="px-6 py-4">{{ customer.phone_number }}</td>
             <td class="px-6 py-4">
-              <button @click="openEditModal(customer)">
+              <button @click="openEditModal(customer)" class="transition duration-150 ease-in-out transform hover:scale-110">
                 <a
-                  class="text-indigo-600 hover:text-indigo-900 dark:text-indigo-400 dark:hover:text-indigo-600 font-semibold transition duration-300 ease-in-out"
+                class="text-bg-black font-semibold"
                   >Edit</a
                 >
               </button>
@@ -115,7 +115,7 @@
                   type="text"
                   name="name"
                   id="name"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-950 focus:border-gray-950 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                   placeholder="Type Customer Name"
                   required
                 />
@@ -132,7 +132,7 @@
                   @input="validateForm"
                   name="address"
                   id="address"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-950 focus:border-gray-950 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                   placeholder="Type Customer Address"
                   required
                 />
@@ -149,7 +149,7 @@
                   @input="validateForm"
                   name="city"
                   id="city"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-950 focus:border-gray-950 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                   placeholder="City"
                   required
                 />
@@ -166,7 +166,7 @@
                   name="Country"
                   @input="validateForm"
                   id="Country"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-950 focus:border-gray-950 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                   placeholder="Country"
                   required
                 />
@@ -183,7 +183,7 @@
                   @input="validateForm"
                   name="phone_number"
                   id="phone_number"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-950 focus:border-gray-950 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                   placeholder="Phone Number"
                   required
                 />
@@ -193,7 +193,7 @@
               @click="addCustomerToDB"
               type="button"
               :class="{
-                'bg-indigo-600 hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50 cursor-pointer':
+                'bg-black text-semibold hover:bg-white hover:text-black hover:border-black border border-transparent border-2 transition duration-300 ease-in-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black cursor-pointer':
                   isFormValid,
                 'bg-gray-300 text-gray-500 cursor-not-allowed': !isFormValid
               }"
@@ -272,8 +272,7 @@
                   @input="validateForm"
                   name="name"
                   id="name"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                  placeholder="Type Customer Name"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-950 focus:border-gray-950 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"                  placeholder="Type Customer Name"
                   required
                 />
               </div>
@@ -289,8 +288,7 @@
                   @input="validateForm"
                   name="address"
                   id="address"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                  placeholder="Type Customer Address"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-950 focus:border-gray-950 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"                  placeholder="Type Customer Address"
                   required
                 />
               </div>
@@ -306,8 +304,7 @@
                   @input="validateForm"
                   name="city"
                   id="city"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                  placeholder="City"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-950 focus:border-gray-950 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"                  placeholder="City"
                   required
                 />
               </div>
@@ -323,8 +320,7 @@
                   @input="validateForm"
                   name="Country"
                   id="Country"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                  placeholder="Country"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-950 focus:border-gray-950 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"                  placeholder="Country"
                   required
                 />
               </div>
@@ -340,8 +336,7 @@
                   @input="validateForm"
                   name="phone_number"
                   id="phone_number"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                  placeholder="Phone Number"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-950 focus:border-gray-950 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"                  placeholder="Phone Number"
                   required
                 />
               </div>
@@ -351,10 +346,10 @@
                 @click="updateCustomerToDB"
                 type="button"
                 :class="{
-                  'bg-indigo-600 hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50 cursor-pointer':
-                    isFormValid,
-                  'bg-gray-300 text-gray-500 cursor-not-allowed': !isFormValid
-                }"
+                'bg-black text-semibold hover:bg-white hover:text-black hover:border-black border border-transparent border-2 transition duration-300 ease-in-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black cursor-pointer':
+                  isFormValid,
+                'bg-gray-300 text-gray-500 cursor-not-allowed': !isFormValid
+              }"
                 :disabled="!isFormValid"
                 class="inline-flex items-center text-white font-medium rounded-lg text-sm px-5 py-2.5 text-center transition duration-300 ease-in-out"
               >
@@ -377,7 +372,7 @@
               <button
                 @click="deleteCustomerFromDB"
                 type="button"
-                class="bg-red-600 hover:bg-red-700 focus:ring-2 focus:ring-red-500 focus:ring-opacity-50 cursor-pointer text-white font-medium rounded-lg text-sm px-5 py-2.5 text-center transition duration-300 ease-in-out"
+                class="bg-white hover:bg-black hover:text-white cursor-pointer text-bg-black font-semibold rounded-lg text-sm px-5 py-2.5 text-center transition duration-300 ease-in-out border-2 border-black"
               >
                 Delete Customer
               </button>

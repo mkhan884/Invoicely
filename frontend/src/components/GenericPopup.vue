@@ -74,7 +74,7 @@
         <button
           @click="buttonClick"
           type="button"
-          class="py-2 px-7 text-sm font-medium text-center text-white rounded-lg bg-indigo-600 hover:bg-indigo-700"
+          class="py-2 px-7 text-sm font-medium text-center text-white rounded-md bg-black hover:bg-white hover:text-black hover:border-black border border-transparent border-2 transition duration-300 ease-in-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
         >
           {{ buttonText }}
         </button>

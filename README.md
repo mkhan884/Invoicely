@@ -19,7 +19,9 @@ Open another terminal and start the Vue development server.
 cd frontend
 npm run dev
 ```
-Finally open the localhost:5173 to use the app. You should be greeted by the Invoicely Log in screen.
+Finally open the localhost:5173 to use the app. You should be greeted by the Invoicely landing page.
+<img width="1437" alt="image" src="https://github.com/mkhan884/Invoicely/assets/60724978/f0de477d-f63d-4ea7-aac8-133af79db2d8">
+
 
 ### Environment 🌐
 Developed using Vue.js (Vuex, Vue-router), Django, SQL, Axios, Tailwind, and jsPDF.

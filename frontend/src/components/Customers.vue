@@ -51,11 +51,11 @@
             <td class="px-6 py-4">{{ customer.country }}</td>
             <td class="px-6 py-4">{{ customer.phone_number }}</td>
             <td class="px-6 py-4">
-              <button @click="openEditModal(customer)" class="transition duration-150 ease-in-out transform hover:scale-110">
-                <a
-                class="text-bg-black font-semibold"
-                  >Edit</a
-                >
+              <button
+                @click="openEditModal(customer)"
+                class="transition duration-150 ease-in-out transform hover:scale-110"
+              >
+                <a class="text-bg-black font-semibold">Edit</a>
               </button>
             </td>
           </tr>
@@ -272,7 +272,8 @@
                   @input="validateForm"
                   name="name"
                   id="name"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-950 focus:border-gray-950 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"                  placeholder="Type Customer Name"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-950 focus:border-gray-950 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                  placeholder="Type Customer Name"
                   required
                 />
               </div>
@@ -288,7 +289,8 @@
                   @input="validateForm"
                   name="address"
                   id="address"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-950 focus:border-gray-950 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"                  placeholder="Type Customer Address"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-950 focus:border-gray-950 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                  placeholder="Type Customer Address"
                   required
                 />
               </div>
@@ -304,7 +306,8 @@
                   @input="validateForm"
                   name="city"
                   id="city"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-950 focus:border-gray-950 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"                  placeholder="City"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-950 focus:border-gray-950 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                  placeholder="City"
                   required
                 />
               </div>
@@ -320,7 +323,8 @@
                   @input="validateForm"
                   name="Country"
                   id="Country"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-950 focus:border-gray-950 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"                  placeholder="Country"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-950 focus:border-gray-950 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                  placeholder="Country"
                   required
                 />
               </div>
@@ -336,7 +340,8 @@
                   @input="validateForm"
                   name="phone_number"
                   id="phone_number"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-950 focus:border-gray-950 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"                  placeholder="Phone Number"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-950 focus:border-gray-950 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                  placeholder="Phone Number"
                   required
                 />
               </div>
@@ -346,10 +351,10 @@
                 @click="updateCustomerToDB"
                 type="button"
                 :class="{
-                'bg-black text-semibold hover:bg-white hover:text-black hover:border-black border border-transparent border-2 transition duration-300 ease-in-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black cursor-pointer':
-                  isFormValid,
-                'bg-gray-300 text-gray-500 cursor-not-allowed': !isFormValid
-              }"
+                  'bg-black text-semibold hover:bg-white hover:text-black hover:border-black border border-transparent border-2 transition duration-300 ease-in-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black cursor-pointer':
+                    isFormValid,
+                  'bg-gray-300 text-gray-500 cursor-not-allowed': !isFormValid
+                }"
                 :disabled="!isFormValid"
                 class="inline-flex items-center text-white font-medium rounded-lg text-sm px-5 py-2.5 text-center transition duration-300 ease-in-out"
               >

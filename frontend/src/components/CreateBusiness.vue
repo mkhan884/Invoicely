@@ -132,7 +132,7 @@
               <div class="flex justify-start">
                 <button
                   @click="addBusiness"
-                  class="mt-4 rounded-md bg-black px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-white hover:text-black border-2 border-black" 
+                  class="mt-4 rounded-md bg-black px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-white hover:text-black border-2 border-black"
                 >
                   Create Business
                 </button>
@@ -144,7 +144,7 @@
     </div>
   </div>
 
-  <div v-else class="businessDisplay mx-auto" style="width: 60%">
+  <div v-else class="displayBusiness mx-auto" style="width: 60%">
     <div class="displayBusiness">
       <div>
         <div class="mt-6 px-4 sm:px-0">
@@ -213,7 +213,7 @@
     </div>
   </div>
 
-  <div class="editWrapper">
+  <div class="editBusinessModal">
     <div
       v-if="editModal"
       tabindex="-1"
@@ -400,7 +400,7 @@
 
               <!-- Delete button -->
               <button
-                @click="deleteBusiness"
+                @click="openConfirmPopup"
                 type="button"
                 class="bg-white hover:bg-black hover:text-white cursor-pointer text-bg-black font-semibold rounded-lg text-sm px-5 py-2.5 text-center transition duration-300 ease-in-out border-2 border-black"
               >
@@ -412,7 +412,6 @@
       </div>
     </div>
   </div>
-
   <div class="popup">
     <GenericPopup
       v-if="showPopup"
@@ -424,12 +423,22 @@
       @button-click="closePopup"
     />
   </div>
+  <div class="confirmPopup">
+    <GenericPopup
+      v-if="showConfirmPopup"
+      :popupTitle="confirmPopupTitle"
+      :popupDescription="confirmPopupDescription"
+      :buttonText="confirmButtonText"
+      :iconType="confirmIconType"
+      @close-popup="closeConfirmPopup"
+      @button-click="deleteBusiness"
+    />
+  </div>
 </template>
 
 <script>
 import GenericPopup from './GenericPopup.vue'
 import axios from 'axios'
-
 export default {
   components: {
     GenericPopup
@@ -453,6 +462,13 @@ export default {
       buttonText: '',
       iconType: '',
       showPopup: false,
+
+      // Confirm Popup Elements
+      showConfirmPopup: false,
+      confirmPopupTitle: '',
+      confirmPopupDescription: '',
+      confirmButtonText: '',
+      confirmIconType: 'success',
 
       // Edit Modal
       editModal: false
@@ -508,33 +524,32 @@ export default {
         this.businessExists = false
       }
     },
-
-    async updateBusiness(){
-        const profileId = this.$store.getters['getProfileId']
-        try {
-            await axios.post(`http://localhost:8000/user/${profileId}/updateBusiness/`, {
-              businessName: this.businessName,
-              streetAddress: this.streetAddress,
-              phoneNumber: this.phoneNumber,
-              city: this.city,
-              country: this.country,
-              organization: this.organization,
-              currency: this.currency
-            })
-            this.closeEditModal()
-            this.getBusiness()
-        } catch (error) {
-          console.error(error)
-        }
+    async updateBusiness() {
+      const profileId = this.$store.getters['getProfileId']
+      try {
+        await axios.post(`http://localhost:8000/user/${profileId}/updateBusiness/`, {
+          businessName: this.businessName,
+          streetAddress: this.streetAddress,
+          phoneNumber: this.phoneNumber,
+          city: this.city,
+          country: this.country,
+          organization: this.organization,
+          currency: this.currency
+        })
+        this.closeEditModal()
+        this.getBusiness()
+      } catch (error) {
+        console.error(error)
+      }
     },
-
-    async deleteBusiness(){
+    async deleteBusiness() {
       const profileId = this.$store.getters['getProfileId']
       try {
         await axios.post(`http://localhost:8000/user/${profileId}/deleteBusiness/`, {
           businessName: this.businessName
         })
         this.closeEditModal()
+        this.closeConfirmPopup()
         this.showPopup = true
         this.popupTitle = 'Success'
         this.popupDescription = 'Successfully deleted business. You can create a new business.'
@@ -546,9 +561,18 @@ export default {
         console.error(error)
       }
     },
-
     closePopup() {
       this.showPopup = false
+    },
+    openConfirmPopup() {
+      this.confirmPopupTitle = 'Are you sure?'
+      this.confirmPopupDescription =
+        'Please confirm that you want to delete your business. Deleting your business will delete any associated documents.'
+      this.confirmButtonText = 'Confirm'
+      this.showConfirmPopup = true
+    },
+    closeConfirmPopup() {
+      this.showConfirmPopup = false
     },
     // Opening the modal sets the Form elements to the values from the this.business array
     openEditModal() {
@@ -574,7 +598,7 @@ export default {
         !!this.currency &&
         !!this.organization
     },
-    clearForm(){
+    clearForm() {
       this.businessName = ''
       this.phoneNumber = ''
       this.streetAddress = ''

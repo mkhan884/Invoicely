@@ -70,8 +70,12 @@
     </div>
     <div class="mt-4 text-center text-sm text-gray-600">
       Already have an account?
-      <button @click="navigateToLogin" class="text-bg-black font-semibold transition transform hover:scale-110"
->Log in</button>
+      <button
+        @click="navigateToLogin"
+        class="text-bg-black font-semibold transition transform hover:scale-110"
+      >
+        Log in
+      </button>
     </div>
 
     <GenericPopup

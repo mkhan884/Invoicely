@@ -6,6 +6,9 @@ import store from '../store/store'
 import Customers from '@/components/Customers.vue'
 import Invoices from '@/components/Invoices.vue'
 import BusinessSettings from '@/components/BusinessSettings.vue'
+import LandingPage from '@/components/LandingPage.vue'
+import NotFoundPage from '@/components/NotFoundPage.vue'
+import NewSidebar from '@/components/newSidebar.vue'
 
 const routes = [
   { path: '/signup', component: RegistrationPage },
@@ -18,7 +21,9 @@ const routes = [
     component: BusinessSettings,
     meta: { requiresAuth: true }
   },
-  { path: '', redirect: '/login' }
+  { path: '', component: LandingPage },
+  { path: '/:pathMatch(.*)', component: NotFoundPage },
+  { path: '/test', component: NewSidebar }
 ]
 
 const router = createRouter({

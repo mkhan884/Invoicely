@@ -1,5 +1,5 @@
 <template>
-  <div class="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
+  <div class="flex min-h-full flex-1 flex-col justify-center px-6 py-12 mt-6 lg:px-8">
     <div class="sm:mx-auto sm:w-full sm:max-w-sm">
       <img
         class="mx-auto h-10 w-auto"
@@ -54,24 +54,25 @@
         </div>
 
         <div>
-          <button
-            type="submit"
-            @click.prevent="login"
-            class="flex w-full justify-center rounded-md bg-black px-3 py-1.5 text-white text-sm font-semibold leading-6 shadow-sm hover:bg-white hover:text-black hover:border-black border border-transparent border-2 transition duration-300 ease-in-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-          >
-            Sign in
-          </button>
+<button
+  type="submit"
+  @click.prevent="login"
+  class="flex w-full justify-center rounded-md bg-black px-3 py-1.5 text-white text-sm font-semibold leading-6 shadow-sm hover:bg-white hover:text-black hover:border-black border border-transparent border-2 transition duration-300 ease-in-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+>
+  Sign in
+</button>
+
+
+
         </div>
       </form>
       <div v-if="error" class="mt-4 text-red-500">{{ error }}</div>
       <div class="mt-4 text-center text-sm text-gray-600">
         Don't have an account?
-        <button
-          @click="navigateToRegistration"
-          class="text-bg-black font-semibold transition transform hover:scale-110"
-        >
-          Sign Up!
-        </button>
+        <button @click="navigateToRegistration" class="text-bg-black font-semibold transition transform hover:scale-110">
+  Sign Up!
+</button>
+
       </div>
     </div>
     <GenericPopup

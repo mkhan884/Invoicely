@@ -119,7 +119,7 @@ export default {
         if (response.data.authenticated) {
           this.$store.commit('setAuthenticated', true)
           this.$store.commit('setProfileId', response.data.profileId)
-          this.$router.push({ path: `/${response.data.profileId}/dashboard` })
+          this.$router.push({ path: `/${response.data.profileId}/customers` })
         }
       } catch (error) {
         // Handle authentication error

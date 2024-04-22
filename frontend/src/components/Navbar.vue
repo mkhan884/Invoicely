@@ -1,41 +1,17 @@
 <template>
   <Disclosure as="nav" class="bg-gray-900">
-    <div class="mx-auto max-w-7xl px-2">
-      <div class="relative flex h-16 items-center justify-between">
-        <div class="absolute inset-y-0 left-0 flex items-center">
+    <div class="max-w-7xl mx-auto px-2">
+      <div class="relative flex items-center justify-between h-16">
+        <!-- Placeholder for potential left side content -->
+        <div class="flex-1 flex items-center justify-start">
+          <!-- Optionally you can add icons or logos if needed here -->
         </div>
-        <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-          <div class="flex-shrink-0 flex items-center">
-            <img class="h-5 w-auto" src="../assets/logo/invoicely-white.png" alt="Invoicely" />
-          </div>
-          <div class="hidden sm:ml-6 sm:block">
-            <div class="flex space-x-4">
-              <a
-                v-for="item in navigation"
-                :key="item.name"
-                :href="item.href"
-                @click.prevent="navigateTo(item.href)"
-                :class="[
-                  item.current
-                    ? 'bg-gray-800 text-white'
-                    : 'text-gray-300 hover:bg-gray-800 hover:text-white',
-                  'rounded-md px-3 py-2 text-sm font-medium'
-                ]"
-                :aria-current="item.current ? 'page' : undefined"
-                >{{ item.name }}</a
-              >
-            </div>
-          </div>
-        </div>
-        <div
-          class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0"
-        >
-          <!-- Profile dropdown -->
-          <Menu as="div" class="relative ml-3">
+
+        <!-- Profile dropdown aligned to the right -->
+        <div class="flex items-center">
+          <Menu as="div" class="ml-auto mr-12 relative">
             <div>
-              <MenuButton
-                class="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-              >
+              <MenuButton class="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                 <span class="sr-only">Open user menu</span>
                 <img
                   class="h-8 w-8 rounded-full"
@@ -52,22 +28,12 @@
               leave-from-class="transform opacity-100 scale-100"
               leave-to-class="transform opacity-0 scale-95"
             >
-              <MenuItems
-                class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
-              >
+              <MenuItems class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                 <MenuItem v-slot="{ active }">
                   <a
                     href="#"
                     :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']"
                     >Your Profile</a
-                  >
-                </MenuItem>
-                <MenuItem v-slot="{ active }">
-                  <a
-                    href="#"
-                    @click="navigateTo(`/${this.$route.params.profileId}/business`)"
-                    :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']"
-                    >Business settings</a
                   >
                 </MenuItem>
                 <MenuItem v-slot="{ active }">
@@ -86,33 +52,12 @@
         </div>
       </div>
     </div>
-
-    <DisclosurePanel class="sm:hidden">
-      <div class="space-y-1 px-2 pb-3 pt-2">
-        <DisclosureButton
-          v-for="item in navigation"
-          :key="item.name"
-          as="a"
-          :href="item.href"
-          :class="[
-            item.current
-              ? 'bg-gray-800 text-white'
-              : 'text-gray-300 hover:bg-gray-800 hover:text-white',
-            'block rounded-md px-3 py-2 text-base font-medium'
-          ]"
-          :aria-current="item.current ? 'page' : undefined"
-          >{{ item.name }}</DisclosureButton
-        >
-      </div>
-    </DisclosurePanel>
   </Disclosure>
 </template>
 
 <script>
 import {
   Disclosure,
-  DisclosureButton,
-  DisclosurePanel,
   Menu,
   MenuButton,
   MenuItem,
@@ -121,8 +66,6 @@ import {
 export default {
   components: {
     Disclosure,
-    DisclosureButton,
-    DisclosurePanel,
     Menu,
     MenuButton,
     MenuItem,
@@ -130,23 +73,6 @@ export default {
   },
   data() {
     return {
-      navigation: [
-        {
-          name: 'Dashboard',
-          href: `/${this.$route.params.profileId}/dashboard`,
-          current: this.$route.path.includes('dashboard')
-        },
-        {
-          name: 'Customers',
-          href: `/${this.$route.params.profileId}/customers`,
-          current: this.$route.path.includes('customers')
-        },
-        {
-          name: 'Invoices',
-          href: `/${this.$route.params.profileId}/invoices`,
-          current: this.$route.path.includes('invoices')
-        }
-      ]
     }
   },
   methods: {

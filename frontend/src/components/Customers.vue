@@ -1,11 +1,17 @@
 <template>
-  <div>
-    <Navbar />
-  </div>
-  <div class="flex min-h-screen">
-    <NewSidebar />
-    <div class="flex-1 overflow-auto">
-    <div class="mx-6 mt-8">
+    
+  <div class="flex h-screen">
+    <!-- Sidebar -->
+    <NewSidebar class="w-64 fixed h-full bg-gray-900 z-30" />
+
+    <!-- Main container for Navbar and content -->
+    <div class="flex flex-col ml-64 flex-1">
+      <!-- Navbar -->
+      <Navbar class="bg-gray-800 w-full" />
+
+      <!-- Main content area -->
+      <main class="flex-1 overflow-y-auto">
+        <div class="mx-6 mt-8">
       <div class="flex justify-between items-center mb-6">
         <h2 class="text-xl font-bold text-gray-800 dark:text-gray-200">Customer Information</h2>
         <div class="flex items-center">
@@ -400,8 +406,13 @@
         @button-click="closePopup"
       />
     </div>
+      </main>
+    </div>
   </div>
-</div>
+    
+    
+    
+
 </template>
 
 <script>
@@ -441,6 +452,7 @@ export default {
   methods: {
     async getCustomersFromDB() {
       const profileId = this.$store.getters['getProfileId']
+      console.log(profileId)
       try {
         const response = await axios.get(`http://localhost:8000/user/${profileId}/getCustomers`)
         this.customers = response.data.customers

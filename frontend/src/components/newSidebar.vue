@@ -1,7 +1,7 @@
 <template>
-    <aside class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0 bg-gray-900 text-xs text-gray-400">
+    <aside class="fixed top-0 left-0 z-40 h-screen transition-transform -translate-x-full sm:translate-x-0 bg-gray-900 text-xs text-gray-400">
       <!-- Logo and title -->
-      <div class="flex justify-center items-center space-x-2 px-4 mb-8 mt-8">
+      <div class="flex justify-center items-center space-x-2 px-4 mb-10 mt-6">
         <img src="../assets/logo/invoicely-white.png" class="h-5 w-auto">
       </div>
       <!-- Navigation -->
@@ -15,7 +15,7 @@
           v-for="item in navigation"
           :key="item.name"
           :to="item.href"
-          class="flex items-center py-2.5 px-4 rounded transition duration-200 hover:bg-gray-800 hover:text-white"
+          class="ml-2 flex items-center py-2.5 px-4 rounded transition duration-200 hover:bg-gray-800 hover:text-white"
           :class="{ 'bg-gray-800 text-white': item.current }"
         >
           <svg class="h-5 w-6 mr-1" viewBox="0 0 24 24">
@@ -38,7 +38,7 @@
           </span>
         </div>
         <div v-for="item in quickActions" :key="item.name"
-            class="flex items-center py-2.5 px-4 rounded transition duration-200 hover:bg-gray-800 hover:text-white cursor-pointer"
+            class="ml-2 flex items-center py-2.5 px-4 rounded transition duration-200 hover:bg-gray-800 hover:text-white cursor-pointer"
             :class="{ 'bg-gray-800 text-white': item.current }">
           <a :href="item.href" @click.prevent="handleAction(item)" class="flex items-center w-full text-left">
             <svg class="h-5 w-6 mr-1" viewBox="0 0 24 24" fill="none">

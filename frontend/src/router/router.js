@@ -17,7 +17,7 @@ const routes = [
   { path: '/:profileId/customers', component: Customers, meta: { requiresAuth: true } },
   { path: '/:profileId/invoices', component: Invoices, meta: { requiresAuth: true } },
   {
-    path: '/:profileId/business-settings',
+    path: '/:profileId/business',
     component: BusinessSettings,
     meta: { requiresAuth: true }
   },

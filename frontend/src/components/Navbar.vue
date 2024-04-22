@@ -1,5 +1,5 @@
 <template>
-  <Disclosure as="nav" class="bg-gray-950">
+  <Disclosure as="nav" class="bg-gray-900">
     <div class="mx-auto max-w-7xl px-2">
       <div class="relative flex h-16 items-center justify-between">
         <div class="absolute inset-y-0 left-0 flex items-center">
@@ -65,7 +65,7 @@
                 <MenuItem v-slot="{ active }">
                   <a
                     href="#"
-                    @click="navigateTo(`/${this.$route.params.profileId}/business-settings`)"
+                    @click="navigateTo(`/${this.$route.params.profileId}/business`)"
                     :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']"
                     >Business settings</a
                   >

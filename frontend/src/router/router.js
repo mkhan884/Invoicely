@@ -5,10 +5,10 @@ import Dashboard from '@/components/Dashboard.vue'
 import store from '../store/store'
 import Customers from '@/components/Customers.vue'
 import Invoices from '@/components/Invoices.vue'
-import BusinessSettings from '@/components/BusinessSettings.vue'
+import Business from '@/components/Business.vue'
 import LandingPage from '@/components/LandingPage.vue'
 import NotFoundPage from '@/components/NotFoundPage.vue'
-import NewSidebar from '@/components/newSidebar.vue'
+import NewSidebar from '@/components/NewSidebar.vue'
 
 const routes = [
   { path: '/signup', component: RegistrationPage },
@@ -18,7 +18,7 @@ const routes = [
   { path: '/:profileId/invoices', component: Invoices, meta: { requiresAuth: true } },
   {
     path: '/:profileId/business',
-    component: BusinessSettings,
+    component: Business,
     meta: { requiresAuth: true }
   },
   { path: '', component: LandingPage },

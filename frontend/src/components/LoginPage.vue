@@ -54,25 +54,24 @@
         </div>
 
         <div>
-<button
-  type="submit"
-  @click.prevent="login"
-  class="flex w-full justify-center rounded-md bg-black px-3 py-1.5 text-white text-sm font-semibold leading-6 shadow-sm hover:bg-white hover:text-black hover:border-black border border-transparent border-2 transition duration-300 ease-in-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
->
-  Sign in
-</button>
-
-
-
+          <button
+            type="submit"
+            @click.prevent="login"
+            class="flex w-full justify-center rounded-md bg-black px-3 py-1.5 text-white text-sm font-semibold leading-6 shadow-sm hover:bg-white hover:text-black hover:border-black border border-transparent border-2 transition duration-300 ease-in-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+          >
+            Sign in
+          </button>
         </div>
       </form>
       <div v-if="error" class="mt-4 text-red-500">{{ error }}</div>
       <div class="mt-4 text-center text-sm text-gray-600">
         Don't have an account?
-        <button @click="navigateToRegistration" class="text-bg-black font-semibold transition transform hover:scale-110">
-  Sign Up!
-</button>
-
+        <button
+          @click="navigateToRegistration"
+          class="text-bg-black font-semibold transition transform hover:scale-110"
+        >
+          Sign Up!
+        </button>
       </div>
     </div>
     <GenericPopup
@@ -119,7 +118,7 @@ export default {
         if (response.data.authenticated) {
           this.$store.commit('setAuthenticated', true)
           this.$store.commit('setProfileId', response.data.profileId)
-          this.$router.push({ path: `/${response.data.profileId}/customers` })
+          this.$router.push({ path: `/${response.data.profileId}/dashboard` })
         }
       } catch (error) {
         // Handle authentication error

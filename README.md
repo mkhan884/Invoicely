@@ -21,6 +21,9 @@ npm run dev
 ```
 Finally open the localhost:5173 to use the app. You should be greeted by the Invoicely landing page.
 
+<img width="1427" alt="image" src="https://github.com/mkhan884/Invoicely/assets/60724978/7cc75533-1824-4b24-a55c-fa1fbb6c94ca">
+
+
 
 ### Environment 🌐
 Developed using Vue.js (Vuex, Vue-router), Django, SQL, Axios, Tailwind, and jsPDF.

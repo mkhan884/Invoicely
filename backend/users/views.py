@@ -105,13 +105,19 @@ def addCustomer(request, profile_id):
         return JsonResponse({'error':'Only POST methods are supported.'}, status=400)
     
 # Method that returns all customers a user has (filtered by profile_id).
-def getCustomers(request, profile_id):
+def get_customers_data(profile_id):
     try:
         customers = list(customer.objects.filter(profile_id=profile_id).values('profile_id', 'name', 'address', 'city', 'country', 'phone_number'))
     except customer.DoesNotExist:
         customers = None
 
     return JsonResponse({'customers': customers})
+
+def getCustomers(request, profile_id):
+    if request.method == 'GET':
+        current_business = get_customers_data(profile_id)
+        return current_business
+
 
 # Method that updates a given customer.
 def updateCustomer(request, profile_id):

@@ -236,6 +236,7 @@ export default {
       invoiceDescription: '',
       invoiceHours: '',
       inoviceRate: '',
+      amountDue: '5000'
     }
   },
   created(){
@@ -271,12 +272,9 @@ export default {
     },
     createInvoice(){
       const doc = new jsPDF()
-
       const marginRight = 10
-      const marginLeft = 10
       
       // Invoice Title
-
       doc.setFontSize(26);
       // Create the full title string
       const title = `Invoice ${this.invoiceNumber}`;
@@ -288,44 +286,90 @@ export default {
       doc.text(title, xPos, 25);
 
       // Business information
-      doc.setFontSize(11)
+      doc.setFontSize(10)
       doc.setFont('undefined', 'bold')
       const nameWidth = doc.getStringUnitWidth(this.businessName) * doc.internal.getFontSize() / doc.internal.scaleFactor
       var xPos = 210 - nameWidth - marginRight
-      doc.text(this.businessName, xPos, 35)
+      doc.text(this.businessName, xPos, 32)
       doc.setFont('undefined', 'normal')
 
       //Business Address
       const addressWidth = doc.getStringUnitWidth(this.businessAddress) * doc.internal.getFontSize() / doc.internal.scaleFactor
       var xPos = 210 - addressWidth - marginRight
-      doc.text(this.businessAddress, xPos, 40)
+      doc.text(this.businessAddress, xPos, 36)
 
       const cityCountry = `${this.businessCity}, ${this.businessCountry}`
       const cityCountryWidth = doc.getStringUnitWidth(cityCountry) * doc.internal.getFontSize() / doc.internal.scaleFactor
       var xPos = 210 - cityCountryWidth - marginRight
-      doc.text(cityCountry, xPos, 45)
+      doc.text(cityCountry, xPos, 40)
 
       // Business Phone Number
       const phoneNumberWidth = doc.getStringUnitWidth(this.businessPhoneNumber) * doc.internal.getFontSize() / doc.internal.scaleFactor
       var xPos = 210 - phoneNumberWidth - marginRight
-      doc.text(this.businessPhoneNumber, xPos, 55)
+      doc.text(this.businessPhoneNumber, xPos, 47)
 
       doc. setDrawColor(228, 228, 228)
       doc.setLineWidth(0.25)
-      doc.line(10, 60, 200, 60)
+      doc.line(10, 52, 200, 52)
       
+      // Customer Information
       doc.setTextColor(150,150,150)
       doc.setFont('undefined', 'bold')
-      doc.setFontSize(9)
-      doc.text('Bill To', 10, 65)
+      doc.setFontSize(8)
+      doc.text('Bill To', 15, 60)
       
-      doc.setFontSize(12);
+      doc.setFontSize(10);
       doc.setTextColor(0,0,0)
-      doc.text(this.selectedCustomer.name, 10, 73)
+      doc.text(this.selectedCustomer.name, 15, 65)
       doc.setFont('undefined', 'normal')
-      doc.text(this.selectedCustomer.address, 10, 78)
-      doc.text(`${this.selectedCustomer.city}, ${this.selectedCustomer.country}`, 10, 83)
-      doc.text(this.selectedCustomer.phone_number, 10, 88)
+      doc.text(this.selectedCustomer.address, 15, 69)
+      doc.text(`${this.selectedCustomer.city}, ${this.selectedCustomer.country}`, 15, 73)
+      doc.text(this.selectedCustomer.phone_number, 15, 77)
+      
+        const invoicePrefix = "Invoice No:   ";
+        const datePrefix = 'Invoice Date:   ';
+        const duePrefix = 'Invoice Due:   ';
+        const amountPrefix = 'Amount Due:   ';
+
+        // Set font to bold to measure the prefix widths
+        doc.setFont("helvetica", "bold");
+        const prefixWidths = [
+            doc.getStringUnitWidth(invoicePrefix) * doc.internal.getFontSize() / doc.internal.scaleFactor,
+            doc.getStringUnitWidth(datePrefix) * doc.internal.getFontSize() / doc.internal.scaleFactor,
+            doc.getStringUnitWidth(duePrefix) * doc.internal.getFontSize() / doc.internal.scaleFactor,
+            doc.getStringUnitWidth(amountPrefix) * doc.internal.getFontSize() / doc.internal.scaleFactor
+        ];
+
+        // Determine the maximum prefix width
+        const maxPrefixWidth = Math.max(...prefixWidths);
+
+        // Define the common endpoint position with a 40-unit right margin
+        const xEnd = 210 - 40;
+
+        // Compute the starting x-coordinate for each prefix
+        const prefixPositions = prefixWidths.map(width => xEnd - width);
+
+        // Render each line
+        doc.setFont("undefined", "bold");
+        doc.text(invoicePrefix, prefixPositions[0], 60);
+        doc.setFont("undefined", "normal");
+        doc.text(this.invoiceNumber, xEnd, 60);
+
+        doc.setFont("undefined", "bold");
+        doc.text(datePrefix, prefixPositions[1], 65);
+        doc.setFont("undefined", "normal");
+        doc.text(this.invoiceDate, xEnd, 65);
+
+        doc.setFont("undefined", "bold");
+        doc.text(duePrefix, prefixPositions[2], 70);
+        doc.setFont("undefined", "normal");
+        doc.text(this.invoiceDue, xEnd, 70);
+
+        doc.setFont("undefined", "bold");
+        doc.text(amountPrefix, prefixPositions[3], 75);
+        doc.setFont("undefined", "normal");
+        doc.text(this.amountDue, xEnd, 75);
+
 
 
         // Invoice Details Table Header
